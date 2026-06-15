@@ -1,27 +1,344 @@
-body {
-	background-color: skyblue;
+/* ============================================================
+   style.css - Estilos para "Paninos y Piadinas"
+   Página de recetas italianas
+   ============================================================ */
+
+/* ============================================================
+   1. IMPORTAR FUENTES DE GOOGLE FONTS
+   Google Fonts nos permite usar tipografías personalizadas
+   sin descargar archivos. Solo las "importamos" desde la web.
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+/* ============================================================
+   2. VARIABLES CSS PERSONALIZADAS
+   Las variables (--nombre) nos permiten reutilizar colores,
+   fuentes, sombras, etc. en todo el archivo.
+   Si queremos cambiar el color principal, solo editamos
+   --color-primario y se actualiza en todos lados.
+   ============================================================ */
+:root {
+    --color-primario: #c0392b;       /* Rojo italiano - para enlaces y acentos */
+    --color-primario-oscuro: #96281b; /* Rojo más oscuro para hover */
+    --color-secundario: #1a5276;     /* Azul marino oscuro - para el header y footer */
+
+    --color-texto: #2c3e50;          /* Color de texto principal */
+    --color-texto-claro: #7f8c8d;    /* Gris - texto secundario */
+
+    --color-fondo: #fdfefe;          /* Blanco hueso - fondo principal */
+    --color-blanco: #ffffff;         /* Blanco puro */
+    --color-gris-claro: #ecf0f1;     /* Gris claro para bordes y separadores */
+
+    --fuente-titulos: 'Playfair Display', serif;  /* Fuente con serifa para títulos */
+    --fuente-texto: 'Open Sans', sans-serif;       /* Fuente limpia para párrafos */
+
+    --max-ancho: 1000px;             /* Ancho máximo del contenido */
 }
 
+/* ============================================================
+   3. RESET Y ESTILOS BASE
+   El "reset" elimina márgenes/paddings que los navegadores
+   ponen por defecto, así empezamos desde cero.
+   ============================================================ */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ============================================================
+   4. ESTILOS DEL CUERPO (body)
+   ============================================================ */
+body {
+    font-family: var(--fuente-texto);
+    background-color: var(--color-fondo);
+    color: var(--color-texto);
+    line-height: 1.7;
+}
+
+/* ============================================================
+   5. ENLACES (<a>)
+   ============================================================ */
+a {
+    color: var(--color-primario);
+    text-decoration: none;
+}
+
+/* Al pasar el mouse, los enlaces se subrayan (estilo clásico web) */
+a:hover {
+    color: var(--color-primario-oscuro);
+    text-decoration: underline;
+}
+
+/* ============================================================
+   6. HEADER - Encabezado con fondo de color
+   El header ocupa todo el ancho de la pantalla.
+   Dentro tiene un contenedor centrado con el contenido.
+   ============================================================ */
+header {
+    background-color: var(--color-secundario);  /* Fondo azul marino */
+    color: var(--color-blanco);                 /* Texto blanco */
+    padding: 30px 20px 20px;                   /* Espacio interno */
+    text-align: center;                         /* Contenido centrado */
+}
+
+/* Título principal dentro del header */
+header h1 {
+    font-family: var(--fuente-titulos);
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+/* Subtítulo / descripción dentro del header */
+header p {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.8);           /* Blanco semi-transparente */
+    margin-bottom: 20px;
+}
+
+/* ============================================================
+   7. NAV - Barra de navegación
+   ============================================================ */
+nav {
+    background-color: rgba(0, 0, 0, 0.15);      /* Fondo oscuro semi-transparente */
+    padding: 10px 0;
+}
+
+/* Lista del menú de navegación */
 .menu {
-	list-style-type: none; /* Quita las biñetas */
-	padding-right: 0; /*Quita la sangría por defecto*/
+    list-style: none;                           /* Quita los puntitos */
+    display: flex;                              /* Elementos en fila */
+    justify-content: center;                    /* Centrados */
+    gap: 5px;                                   /* Pequeño espacio entre items */
+    flex-wrap: wrap;                            /* Si no caben, bajan de línea */
+    padding: 0 20px;
 }
 
 .menu li {
-	/* display: inline-block; - Hace que los elementos estén en línea (uno al lado del otro)
-   pero permitiendo ajustar ancho, alto, márgenes y padding verticales.
-   Útil para menús horizontales, botones, tarjetas en fila. */
-	display: inline-block; 
-	margin-right: 15px;
+    display: inline-block;
 }
 
+/* Enlaces del menú */
+.menu li a {
+    display: block;
+    color: var(--color-blanco);                 /* Texto blanco */
+    padding: 8px 18px;                          /* Espacio interno */
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: background-color 0.3s;
+}
+
+.menu li a:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Fondo blanco tenue al hover */
+    text-decoration: none;                      /* Sin subrayado en el menú */
+    border-radius: 4px;
+}
+
+/* Input de búsqueda dentro del menú */
+.menu input {
+    border: none;
+    border-radius: 4px;
+    padding: 8px 14px;
+    font-family: var(--fuente-texto);
+    font-size: 0.9rem;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.menu input:focus {
+    outline: 2px solid var(--color-primario);   /* Borde rojo al enfocar */
+}
+
+/* ============================================================
+   8. CONTENEDOR PRINCIPAL (<main>)
+   ============================================================ */
+main {
+    max-width: var(--max-ancho);                /* Ancho máximo */
+    margin: 0 auto;                             /* Centrado */
+    padding: 40px 20px 60px;                    /* Espacio interno */
+    min-height: 400px;                          /* Altura mínima */
+}
+
+/* ============================================================
+   9. TÍTULOS (h2, h3)
+   ============================================================ */
+h2 {
+    font-family: var(--fuente-titulos);
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--color-texto);
+    margin-bottom: 15px;
+}
+
+h3 {
+    font-family: var(--fuente-titulos);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--color-secundario);
+    margin-bottom: 10px;
+}
+
+/* ============================================================
+   10. PÁRRAFOS
+   ============================================================ */
+p {
+    font-size: 1rem;
+    color: var(--color-texto-claro);
+    margin-bottom: 20px;
+}
+
+/* ============================================================
+   11. RECETA DEL DÍA (.recetadeldia)
+   Sección destacada con marco y fondo gris claro,
+   estilo "recortable" de página web tradicional.
+   ============================================================ */
 .recetadeldia {
-	border: 1px solid #ccc;
-	border-radius: 8px;
-	padding: 15px;
-	background-color: white;
+    background-color: var(--color-gris-claro);  /* Fondo gris claro */
+    border: 1px solid #bdc3c7;                  /* Borde gris */
+    padding: 25px;                              /* Espacio interno */
+    margin-bottom: 40px;
 }
 
+/* Título de la sección "Receta del día" */
+.recetadeldia h2 {
+    font-size: 1.3rem;
+    color: var(--color-primario);               /* Rojo */
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 8px;
+    border-bottom: 2px solid var(--color-primario); /* Línea roja debajo */
+    padding-bottom: 8px;
+}
+
+/* Nombre de la receta */
+.recetadeldia h3 {
+    font-size: 1.7rem;
+    margin-bottom: 15px;
+}
+
+/* Imagen dentro de la receta */
 .recetadeldia img {
-	max-width: 100%;
+    max-width: 100%;                            /* Nunca más ancha que su contenedor */
+    height: auto;                               /* Mantiene la proporción */
+    border: 1px solid #bdc3c7;                  /* Borde gris alrededor de la imagen */
+    display: block;                             /* Elimina espacio blanco debajo */
+    margin-bottom: 15px;
+}
+
+/* Enlace "Ver receta completa" */
+.recetadeldia a {
+    display: inline-block;
+    background-color: var(--color-primario);    /* Fondo rojo */
+    color: var(--color-blanco);
+    padding: 10px 24px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 4px;
+}
+
+.recetadeldia a:hover {
+    background-color: var(--color-primario-oscuro);
+    text-decoration: none;
+}
+
+/* ============================================================
+   12. FOOTER (PIE DE PÁGINA)
+   ============================================================ */
+footer {
+    background-color: var(--color-secundario);   /* Azul marino */
+    color: var(--color-blanco);
+    padding: 25px 20px;
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+footer ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+footer a {
+    color: #e74c3c;                             /* Rojo para enlaces en footer */
+    font-weight: 600;
+}
+
+footer a:hover {
+    color: #c0392b;
+}
+
+/* ============================================================
+   13. RESPONSIVE - Pantallas medianas (tablets)
+   ============================================================ */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    .menu {
+        gap: 3px;
+    }
+
+    .menu li a {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+
+    .menu input {
+        margin-left: 5px;
+        width: 140px;
+    }
+
+    .recetadeldia h3 {
+        font-size: 1.4rem;
+    }
+
+    footer ul {
+        gap: 15px;
+        flex-direction: column;
+    }
+}
+
+/* ============================================================
+   14. RESPONSIVE - Pantallas chicas (celulares)
+   ============================================================ */
+@media (max-width: 480px) {
+    header {
+        padding: 20px 15px 15px;
+    }
+
+    header h1 {
+        font-size: 1.6rem;
+    }
+
+    .menu {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu input {
+        margin: 8px 0 0 0;
+        width: 100%;
+    }
+
+    main {
+        padding: 25px 15px 40px;
+    }
+
+    .recetadeldia {
+        padding: 15px;
+    }
+
+    .recetadeldia h3 {
+        font-size: 1.2rem;
+    }
+
+    .recetadeldia a {
+        width: 100%;
+        text-align: center;
+    }
 }
